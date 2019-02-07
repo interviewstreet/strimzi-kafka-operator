@@ -117,7 +117,7 @@ public class PartialRollingUpdateTest {
 
         ResourceOperatorSupplier supplier = new ResourceOperatorSupplier(vertx, bootstrapClient, true, 60_000L);
         KafkaAssemblyOperator kco = new KafkaAssemblyOperator(vertx, true, 2_000,
-                new MockCertManager(), supplier, VERSIONS);
+                new MockCertManager(), supplier, VERSIONS, null);
 
         LOGGER.info("bootstrap reconciliation");
         Async createAsync = context.async();
@@ -159,7 +159,7 @@ public class PartialRollingUpdateTest {
         ResourceOperatorSupplier supplier = new ResourceOperatorSupplier(vertx, mockClient, true, 60_000L);
 
         this.kco = new KafkaAssemblyOperator(vertx, true, 2_000,
-                new MockCertManager(), supplier, VERSIONS);
+                new MockCertManager(), supplier, VERSIONS, null);
         LOGGER.info("Started test KafkaAssemblyOperator");
     }
 

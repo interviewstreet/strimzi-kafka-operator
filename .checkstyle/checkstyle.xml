@@ -119,10 +119,16 @@
         <module name="IllegalToken">
             <property name="tokens" value="LITERAL_ASSERT"/>
         </module>
+
+        <!-- Make the @SuppressWarnings annotations available to Checkstyle -->
+        <module name="SuppressWarningsHolder" />
     </module>
 
     <module name="SuppressionFilter">
         <property name="file" value="${checkstyle.suppressions.file}"/>
     </module>
+
+    <!-- Filter out Checkstyle warnings that have been suppressed with the @SuppressWarnings annotation -->
+    <module name="SuppressWarningsFilter" />
 </module>
 

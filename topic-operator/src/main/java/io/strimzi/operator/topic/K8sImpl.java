@@ -110,6 +110,12 @@ public class K8sImpl implements K8s {
                         LOGGER.debug("Label " + Labels.STRIMZI_TOPIC_LABEL + " nor spec.topicName set. Searching by resource name");
                         // use resource name whether the topicName is not set
                         kafkaTopicNameHash = Integer.toString(list.get(i).getMetadata().getName().hashCode());
+                    } else {
+                        if (new TopicName(list.get(i).getMetadata().getName()).asMapName().toString().equals(topicName)) {
+                            LOGGER.debug("spec.topicName set but  Searching by resource name");
+                            // topicName set, but might not be equal to topic name
+                            kafkaTopicNameHash = Integer.toString(topicName.hashCode());
+                        }
                     }
                     LOGGER.debug("Comparing: " + topicName.hashCode() + " - " + kafkaTopicNameHash + " (" + list.get(i).getMetadata().getName() + ")");
                     if (Integer.toString(topicName.hashCode()).equals(kafkaTopicNameHash)) {
